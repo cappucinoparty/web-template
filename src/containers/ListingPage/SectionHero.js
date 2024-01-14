@@ -1,7 +1,8 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import { FormattedMessage } from '../../util/reactIntl';
 import { ResponsiveImage, Modal } from '../../components';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'; // Make sure this import is placed after the DatePicker import
 
 import ImageCarousel from './ImageCarousel/ImageCarousel';
 import ActionBarMaybe from './ActionBarMaybe';
@@ -20,6 +21,7 @@ const SectionHero = props => {
     onManageDisableScrolling,
   } = props;
 
+  const [startDate, setStartDate] = useState(new Date());
   const hasImages = listing.images && listing.images.length > 0;
   const firstImage = hasImages ? listing.images[0] : null;
   const variants = firstImage
@@ -75,6 +77,7 @@ const SectionHero = props => {
           imageVariants={['scaled-small', 'scaled-medium', 'scaled-large', 'scaled-xlarge']}
         />
       </Modal>
+      <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
     </div>
   );
 };
